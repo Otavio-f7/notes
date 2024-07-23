@@ -5,20 +5,19 @@ import 'package:notes/view/widget/alert_to_delete.dart';
 
 class CardNote extends StatelessWidget {
 
-  final int index; 
   final Note note;
 
-  const CardNote(this. index, this.note, {super.key});
+  const CardNote(this.note, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.of(context).pushNamed('/note', arguments: [index, note]);
+        Navigator.of(context).pushNamed('/note', arguments: note);
       },
       onLongPress: () => showDialog(
         context: context,
-        builder: (_)=> AlertToDelete(index, note.id)
+        builder: (_)=> AlertToDelete(note.id)
       ),
       child: ClipRRect(
         borderRadius: const BorderRadius.only(

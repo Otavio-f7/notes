@@ -20,25 +20,23 @@ class NotesRepository extends ChangeNotifier{
 
   Future<void> getNotes() async {
     db = await DB.instance.database;
+    _notes.clear();
     List notes = await db.query('notes');
-    print(notes);
     for (var note in notes) {
       _notes.add(Note(id: note['id'], text: note['text'], modified: note['modified']));
     }
     notifyListeners();
   }
 
-  setNotes(int i, int id, String text, int modified) async {
+  setNotes(int id, String text, int modified) async {
     db = await DB.instance.database;
 
     await db.rawUpdate(
-
       'UPDATE notes SET text = ?, modified = ? WHERE id = ?',
       [text, modified, id]
     );  
     
-    _notes[i].text = text;
-    _notes[i].modified = modified;
+    getNotes();
     notifyListeners();
   }
 
@@ -54,10 +52,10 @@ class NotesRepository extends ChangeNotifier{
     notifyListeners(); 
   }
 
-  deleteNote(int i, int id) async{
+  deleteNote(int id) async{
     db = await DB.instance.database;    
     await db.rawDelete('DELETE FROM notes WHERE id = ?', ['$id']);
-    _notes.removeAt(i);
+    getNotes();
     notifyListeners();
   }
 }

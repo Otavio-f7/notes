@@ -14,9 +14,7 @@ class NotePage extends StatefulWidget {
 class _NotePageState extends State<NotePage> {
   @override
   Widget build(BuildContext context) {
-    var listarg = ModalRoute.of(context)!.settings.arguments as List;
-    int index = listarg[0];
-    Note note = listarg[1];
+    var note = ModalRoute.of(context)!.settings.arguments as Note;
     var repository = Provider.of<NotesRepository>(context);
     final formKey = GlobalKey<FormState>();
     final textNote = TextEditingController();
@@ -28,7 +26,7 @@ class _NotePageState extends State<NotePage> {
           IconButton(
             onPressed: (){
               if(formKey.currentState!.validate()){
-                repository.setNotes( index ,note.id, textNote.text, DateTime.now().millisecondsSinceEpoch);
+                repository.setNotes( note.id, textNote.text, DateTime.now().millisecondsSinceEpoch);
                 Navigator.of(context).pop();
               }
             }, 

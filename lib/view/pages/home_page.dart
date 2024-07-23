@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.surface,
         onPressed: () async {
           await provider.insertNotes();
-          Navigator.of(context).pushNamed('/note', arguments: [provider.notes.length -1, provider.notes.last]);
+          Navigator.of(context).pushNamed('/note', arguments: provider.notes.last);
           },
         child: const Icon(Icons.add),
       )

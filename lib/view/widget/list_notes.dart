@@ -15,19 +15,17 @@ class ListNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<NotesRepository>(context);
     final List<Note> notesList = provider.notes;
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 1,
-          childAspectRatio: 3/2,
-          crossAxisSpacing: 0.3,
-        ),
-        shrinkWrap: true,
-        itemCount: notesList.length,
-        itemBuilder: (ctx, i) => Padding(
-          padding: const EdgeInsets.all(5),
-          child: CardNote(i, notesList[i]),
-        )),
-    );
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 1,
+        childAspectRatio: 3/2,
+        crossAxisSpacing: 0.3,
+      ),
+      shrinkWrap: true,
+      itemCount: notesList.length,
+      itemBuilder: (ctx, i) => Padding(
+        padding: const EdgeInsets.all(5),
+        child: CardNote(notesList[i]),
+      ));
   }
 }

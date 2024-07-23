@@ -3,9 +3,8 @@ import 'package:notes/repositories/notes_repository.dart';
 import 'package:provider/provider.dart';
 
 class AlertToDelete extends StatelessWidget {
-  final int index;
   final int id;
-  const AlertToDelete(this.index, this.id, {super.key});
+  const AlertToDelete(this.id, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class AlertToDelete extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: (){
-                provider.deleteNote(index, id);
+                provider.deleteNote(id);
                 Navigator.of(context).pop();
               }, 
               child:  const Text('Sim'),
